@@ -1,0 +1,44 @@
+
+import get_decreasing_data
+import pandas as pd
+import numpy as np
+
+import matplotlib.pyplot as plt
+import seaborn as cnc
+
+%matplotlib inline
+
+def plot_series_as_func_of_time(col):
+    y = np.array(col)
+    x = x = np.arange(0,y.shape[0])/2
+    plt.plot(x,y)
+    return x, y
+
+def mypolyfit_y(x, y, deg):
+    a = np.polyfit(x, y, deg)
+    yy=0
+    for j in range(len(a)):
+        yy += a[-j-1]*x**j
+    return a, yy
+
+df = get_decreasing_data.get_decreasing_df()
+
+df["posZ"]
+
+k=4
+
+_ = plot_series_as_func_of_time(df["posZ"].iloc[k])
+
+x, y = plot_series_as_func_of_time(df["velZ"].iloc[k])
+
+a, yy = mypolyfit_y(x, y, 2)
+
+yy = np.array([y, yy]).T
+
+plt.plot(x, yy)
+
+
+
+
+
+
